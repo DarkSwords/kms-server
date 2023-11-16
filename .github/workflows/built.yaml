@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master  # 这里根据你的默认分支来设置
+  workflow_dispatch:  # 添加手动触发事件
+    inputs:
+      manual_trigger:
+        description: 'Manually trigger workflow'  # 手动触发的描述信息
 
 jobs:
   build:
@@ -20,4 +24,3 @@ jobs:
         run: |
           docker build -t ${{ github.repository_owner }}/repository:latest .
           docker push ${{ github.repository_owner }}/repository:latest
- 
