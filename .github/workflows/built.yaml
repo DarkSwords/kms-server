@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - main  # 这里根据你的默认分支来设置
+      - master  # 这里根据你的默认分支来设置
 
 jobs:
   build:
