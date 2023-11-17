@@ -1,26 +1,26 @@
-name: Docker Build and Push
+name: Docker Build and Push  # 工作流程的名称
 
 on:
   push:
     branches:
-      - master  # 这里根据你的默认分支来设置
-  workflow_dispatch:  # 添加手动触发事件
+      - master  # 触发条件：当代码提交到 master 分支时触发
+  workflow_dispatch:  # 添加手动触发事件，可在 Actions 页面手动触发执行
     inputs:
       manual_trigger:
         description: 'Manually trigger workflow'  # 手动触发的描述信息
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 在最新版的 Ubuntu 环境中执行
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository  # 检出代码仓库
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
+      - name: Login to Docker Hub  # 登录到 Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image  # 构建并推送 Docker 镜像
         run: |
-          docker build -t ${{ github.repository_owner }}/repository:latest .
-          docker push ${{ github.repository_owner }}/repository:latest
+          docker buildx create --use  # 创建并使用 Buildx 构建器
+          docker buildx build --platform linux/amd64,linux/arm64,linux/s390x -t ${{ secrets.DOCKER_USERNAME }}/repository:latest . --push  # 构建并推送 Docker 镜像至 Docker Hub
