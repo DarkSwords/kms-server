@@ -1,13 +1,7 @@
 name: Docker Build and Push  # 工作流程的名称
 
 on:
-  push:
-    branches:
-      - master  # 触发条件：当代码提交到 master 分支时触发
   workflow_dispatch:  # 添加手动触发事件，可在 Actions 页面手动触发执行
-    inputs:
-      manual_trigger:
-        description: 'Manually trigger workflow'  # 手动触发的描述信息
 
 jobs:
   build:
