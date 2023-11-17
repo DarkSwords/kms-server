@@ -51,6 +51,15 @@ docker run -d --restart=always --network host dnomd343/kms-server
 # 或使用bridge网络
 docker run -d --restart=always -p 1688-1689:1688-1689 dnomd343/kms-server
 ```
+```
+version: '3'
+services:
+  kms-server:
+    image: dockerhub16/kms-server
+    ports:
+      - "1688-1689:1688-1689"  #1689 web访问端口
+    restart: always
+```
 
 仅开启KMS服务：
 
