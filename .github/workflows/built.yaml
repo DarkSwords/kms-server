@@ -17,4 +17,4 @@ jobs:
       - name: Build and push Docker image  # 构建并推送 Docker 镜像
         run: |
           docker buildx create --use  # 创建并使用 Buildx 构建器
-          docker buildx build --platform linux/amd64,linux/arm64,linux/s390x -t ${{ secrets.DOCKER_USERNAME }}/repository:latest . --push  # 构建并推送 Docker 镜像至 Docker Hub
+          docker buildx build --platform linux/amd64,linux/arm64,linux/s390x -t ${{ secrets.DOCKER_USERNAME }}/kms-server-test:latest . --push  # 构建并推送 Docker 镜像至 Docker Hub
